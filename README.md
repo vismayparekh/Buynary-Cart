@@ -74,7 +74,8 @@ Follow these steps to set up and run the project locally:
     ```
 
 9. With this query enter products in the products table:
-    INSERT INTO public."Shopping_cart_system_product" (name, price, category) VALUES
+    ```
+   INSERT INTO public."Shopping_cart_system_product" (name, price, category) VALUES
     ('Laptop', 1000, 'Electronics'),
     ('Smartphone', 500, 'Electronics'),
     ('Headphones', 80, 'Electronics'),
@@ -87,9 +88,10 @@ Follow these steps to set up and run the project locally:
     ('Milk', 8, 'Groceries'),
     ('Bread', 10, 'Groceries'),
     ('Fresh Vegetables', 15,'Groceries');
+    ```
 
-10. Run the server:
+11. Run the server:
     ```
     python manage.py runserver
     ```
-11. You can now access the website through the link you get in the cmd after running the runserver command.
+12. You can now access the website through the link you get in the cmd after running the runserver command.
