@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - {{ category }}</title>
+    {% load static %}
+    <style>
+        /* Base Styling */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        * {
+            box-sizing: inherit;
+        }
+
+        /* Navbar */
+        nav {
+            background-color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            background-color: #45a049;
+        }
+
+        /* Main Content */
+        #mainContent {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+            margin: 0 auto;
+            width: 90%;
+            max-width: 1400px;
+        }
+
+        .left-container-catlog {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .left-container-catlog img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .right-container-catlog {
+            flex: 2;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-container-catlog h1,
+        .right-container-catlog h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Products List */
+        .category-container-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cat-container-prod {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cat-container-prod:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .prod-heading {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .prod-price {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .price-flex_position {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .prod-pricevalue {
+            font-size: 1.2rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .prod-quantity {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .input_quant {
+            width: 60px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .prod_addcart {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .prod_addcart:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            #mainContent {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-container-catlog {
+                margin-bottom: 20px;
+            }
+
+            .right-container-catlog {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Buynary Cart</div>
+        <div class="menu">
+            <a href="{% url 'user_home' %}">Home</a>
+            <a href="{% url 'view_cart' %}">My Cart</a>
+            <a href="{% url 'home' %}">Logout</a>
+        </div>
+    </nav>
+    <main id="mainContent"> 
+        <div class="left-container-catlog">
+            <img id="background-image" src="{% static 'Home_shopping_wallpaper.jpg' %}" alt="Shopping Image">
+        </div>
+        <div class="right-container-catlog">
+            <h1>{{ category }}</h1>
+            <h3>Choose your Product</h3>
+            <div class="category-container-list">
+                {% if products %}
+                {% for product in products %}
+                <div class="cat-container-prod">
+                    <div>
+                        <div class="prod-heading">{{ product.name }}</div>
+                        <div class="prod-price">Price: <span class="prod-pricevalue">$ {{ product.price }}</span></div>
+                    </div>
+                    <form method="post" action="{% url 'add_to_cart' product_id=product.id %}">
+                        {% csrf_token %}
+                        <div class="price-flex_position">
+                            <label class="prod-quantity">Quantity:</label>
+                            <input class="input_quant" type="number" name="quantity" value="1" min="1" required>
+                            <button class="prod_addcart" type="submit">Add to Cart</button>
+                        </div>
+                    </form>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p>No products found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Buynary Cart. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

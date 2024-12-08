@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buynary Cart - Sign Up</title>
+    {% load static %}
+    <style>
+        /* Base Styles */
+        html,
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        nav {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .logout-home {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-home:hover {
+            background-color: #45a049;
+        }
+
+        #mainContent {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: calc(100vh - 60px);
+            padding: 0 10%;
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-container img {
+            max-width: 80%;
+            height: auto;
+        }
+
+        .right-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f7f7;
+            padding: 30px;
+            box-shadow: -3px 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .right-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        form label {
+            display: block;
+            text-align: left;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        form button {
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Buynary Cart</div>
+        <a href="{% url 'home' %}" class="logout-home">Home</a>
+    </nav>
+
+    <main id="mainContent">
+        <div class="left-container">
+            <img id="background-image" src="{% static 'Home_shopping_wallpaper.jpg' %}" alt="Shopping Image">
+        </div>
+        <div class="right-container">
+            <h1>Sign Up</h1>
+            <form method="post" id="signupForm">
+                {% csrf_token %}
+
+                <!-- Show Django form non-field errors -->
+                {% if form.non_field_errors %}
+                    <div class="error-message">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Username -->
+                <label for="username">Username:</label>
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+                <input type="text" id="username" name="username" required>
+
+                <!-- Email -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <!-- Password -->
+                <label for="password1">Password:</label>
+                {% if form.password1.errors %}
+                    <div class="error-message">
+                        {{ form.password1.errors }}
+                    </div>
+                {% endif %}
+                <input type="password" id="password1" name="password1" required minlength="8">
+
+                <!-- Confirm Password -->
+                <label for="password2">Confirm Password:</label>
+                {% if form.password2.errors %}
+                    <div class="error-message">
+                        {{ form.password2.errors }}
+                    </div>
+                {% endif %}
+                <input type="password" id="password2" name="password2" required minlength="8">
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Buynary Cart. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

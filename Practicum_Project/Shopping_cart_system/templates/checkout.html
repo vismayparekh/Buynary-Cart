@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    {% load static %}
+    <style>
+        html,
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: auto;
+            width: 100%;
+        }
+
+        nav {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 30px;
+            padding-left: 25px;
+            font-style: italic;
+            color: whitesmoke;
+        }
+
+        .menu a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .menu a:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        #mainContent {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .left-container-catlog {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-container-catlog img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .right-container-catlog {
+            width: 55%;
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .right-container-catlog h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .category-container-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Ensure consistent spacing between all items */
+        }
+        
+        .cat-container-prod {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        
+
+        .cat-container-prod:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .prod-heading {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .prod-price {
+            font-size: 1rem;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .prod-price.unit {
+            font-weight: normal; /* Remove bold */
+            color: black; /* Set color to black */
+            font-size: 1rem; /* Adjust font size if necessary */
+        }
+
+        .prod-pricevalue {
+            font-size: 1.1rem;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input_quant,
+        select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            flex: 1;
+        }
+
+        .input_quant:hover,
+        select:hover {
+            border-color: #4CAF50;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .prod_plcorder {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .prod_plcorder:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .message.success {
+            color: #4CAF50;
+            background-color: #E8F5E9;
+        }
+
+        .message.warning {
+            color: #D32F2F;
+            background-color: #FFEBEE;
+        }
+
+        @media screen and (max-width: 768px) {
+            #mainContent {
+                flex-direction: column;
+            }
+
+            .left-container-catlog {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .right-container-catlog {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Buynary Cart</div>
+        <div class="menu">
+            <a href="{% url 'user_home' %}">Home</a>
+            <a href="{% url 'view_cart' %}">My Cart</a>
+            <a href="{% url 'home' %}">Logout</a>
+        </div>
+    </nav>
+
+    <main id="mainContent">
+        <div class="left-container-catlog">
+            <img src="{% static 'Home_shopping_wallpaper.jpg' %}" alt="Shopping Image">
+        </div>
+        <div class="right-container-catlog">
+            <h1>Checkout</h1>
+            {% if total_price > request.user.userprofile.budget %}
+            <div class="message warning">
+                Warning: Your total price (${{ total_price }}) exceeds your budget (${{ request.user.userprofile.budget }}).
+            </div>
+            {% else %}
+            <div class="message success">
+                Great! Your total price (${{ total_price }}) is within your budget (${{ request.user.userprofile.budget }}).
+            </div>
+            {% endif %}
+
+            <div class="category-container-list">
+                {% for item in cart_items %}
+                <div class="cat-container-prod">
+                    <div>
+                        <p class="prod-heading">{{ item.product.name }}</p>
+                        <p class="prod-price">Quantity: {{ item.quantity }}</p>
+                    </div>
+                    <div class="price-flex_position">
+                        <p class="prod-price unit">Unit Price: ${{ item.product.price }}</p>
+                        <p class="prod-pricevalue">Total Price: ${{ item.total_price }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="cat-container-prod">
+                    <div>
+                        <p class="prod-heading">Apply Coupon:</p>
+                    </div>
+                    <div>
+                        <form action="{% url 'checkout' %}" method="get">
+                            <input class="input_quant" type="text" name="coupon_code" placeholder="Enter coupon code">
+                            <input type="submit" value="Apply Coupon">
+                        </form>
+                    </div>
+                </div>
+                <div class="cat-container-prod">
+                    <div>
+                        <p class="prod-heading">Select Payment:</p>
+                    </div>
+                    <div>
+                        <form method="post" action="{% url 'process_payment' %}">
+                            {% csrf_token %}
+                            <select name="payment_method" id="payment_method" class="input_quant">
+                                <option value="credit card">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                    </div>
+                </div>
+            
+
+                <div class="cat-container-prod">
+                    <div>
+                        <p class="prod-heading">Total Payment:</p>
+                    </div>
+                    <div>
+                        <p class="prod-pricevalue">$ {{ total_price }}</p>
+                    </div>
+                </div>
+
+                <button class="prod_plcorder" type="submit">Make Payment</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Buynary Cart. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

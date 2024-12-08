@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buynary Cart- Login</title>
+    {% load static %}
+    <style>
+        /* Base Styles */
+        html,
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        nav {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .logout-home {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-home:hover {
+            background-color: #45a049;
+        }
+
+        #mainContent {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: calc(100vh - 60px);
+            padding: 0 10%;
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .left-container img {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .right-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f7f7;
+            padding: 20px;
+            box-shadow: -3px 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .right-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        form button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #mainContent {
+                flex-direction: column;
+                padding: 0 5%;
+            }
+
+            .left-container {
+                margin-bottom: 20px;
+            }
+
+            .right-container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            form button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Buynary Cart</div>
+        <a href="{% url 'home' %}" class="logout-home">Home</a>
+    </nav>
+
+    <main id="mainContent">
+        <div class="left-container">
+            <img id="background-image" src="{% static 'Home_shopping_wallpaper.jpg' %}" alt="Background Image">
+        </div>
+        <div class="right-container">
+            <h1>Login</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Buynary Cart. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

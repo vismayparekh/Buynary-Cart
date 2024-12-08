@@ -1,33 +1,33 @@
-# INFO_542_Project
-Shopping Cart System
+# INFO_591_Project
+Buynary Cart
 
 This repository contains a Django-based shopping cart project that enables users to browse products, add items to their cart, apply discounts, and proceed to checkout. The project incorporates various features, including user authentication, product categorization, and a flexible discount system.
 
 Features
-User Authentication:
 
+User Authentication:
 Users can register, log in, and log out.
 Authenticated users have access to personalized features such as setting budgets and viewing their order history.
-Product Management:
 
+Product Management:
 Products are categorized, allowing users to easily navigate through different product types.
 Each product includes details such as name, category, and price.
-Shopping Cart:
 
+Shopping Cart:
 Users can add products to their shopping cart and view the cart at any time.
 Quantity adjustments and product removal are supported.
-Discount Strategies:
 
+Discount Strategies:
 The project supports multiple discount strategies, including quantity-based discounts and coupon-based discounts.
 Discounts are dynamically applied based on the user's cart content.
+
 Budget Control:
-
 Users can set budgets, and the system notifies them if their cart total exceeds the set budget during checkout.
+
 Observers:
-
 Observers, such as the BudgetExceededObserver and PriceDecreasedObserver, provide real-time notifications to users based on certain conditions.
-Checkout Process:
 
+Checkout Process:
 Users can proceed to checkout, where various discounts are applied based on the cart's content.
 The system supports payment methods like credit cards and PayPal.
 
@@ -50,7 +50,7 @@ Follow these steps to set up and run the project locally:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Shopping_cart_system',
+        'NAME': 'Buynary_cart',
         'USER': 'postgres',
         'PASSWORD':'your_password',
         'HOST':'localhost',
